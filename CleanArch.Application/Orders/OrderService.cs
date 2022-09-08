@@ -46,7 +46,6 @@ namespace CleanArch.Application.Orders
             return new OrderDto()
             {
                 Id = order.Id,
-                ProductId = order.ProductId
             };
         }
 
@@ -55,7 +54,7 @@ namespace CleanArch.Application.Orders
             return _repository.GetAll().Select(order => new OrderDto()
             {
                 Id = order.Id,
-                ProductId = order.ProductId
+                //ProductId = order.ProductId
             }).ToList();
         }
     }

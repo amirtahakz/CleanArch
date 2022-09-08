@@ -1,8 +1,10 @@
 ﻿using CleanArch.Domain.OrderAgg;
 using CleanArch.Domain.OrderAgg.Events;
 using CleanArch.Domain.OrderAgg.Services;
+using CleanArch.Domain.ProductAgg.Exceptions;
 using CleanArch.Domain.Shared;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +35,7 @@ namespace CleanArch.Domain.OrderAgg
         public void AddItem(Guid productId , int count , int price , IOrderDomainService orderService)
         {
             if (!orderService.IsProductExist(productId))
-                throw new Exception("ss");
+                throw new ProductNotFoundException();
 
             Items.Add(new OrderItem(Id , productId ,count , Money.FromTooman(price)));
             TotalItems += count;

@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Persistant.Ef\" />
+    <Compile Remove="Persistant.Ef\**" />
+    <EmbeddedResource Remove="Persistant.Ef\**" />
+    <None Remove="Persistant.Ef\**" />
   </ItemGroup>
 
   <ItemGroup>
