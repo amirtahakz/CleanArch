@@ -37,7 +37,7 @@ namespace CleanArch.Application.Products
             var product = _repository.GetById(productId);
             return new ProductDto()
             {
-                Price = product.Price.Value,
+                Price = product.Money.Value,
                 Id = productId,
                 Title = product.Title
             };
@@ -47,7 +47,7 @@ namespace CleanArch.Application.Products
         {
             return _repository.GetAll().Select(product => new ProductDto()
             {
-                Price = product.Price.Value,
+                Price = product.Money.Value,
                 Id = product.Id,
                 Title = product.Title
             }).ToList();

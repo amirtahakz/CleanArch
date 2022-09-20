@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CleanArch.Domain.Shared.Exceptions;
+
 
 namespace CleanArch.Domain.Shared
 {
@@ -16,7 +13,7 @@ namespace CleanArch.Domain.Shared
         public Money(int rialValue)
         {
             if (rialValue < 0)
-                throw new InvalidDataException();
+                throw new InvalidDomainDataException();
 
             Value = rialValue;
         }

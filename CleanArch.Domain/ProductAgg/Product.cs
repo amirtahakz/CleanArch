@@ -13,16 +13,17 @@ namespace CleanArch.Domain.ProductAgg
     {
         public Guid Id { get; private set; }
         public string Title { get; private set; }
-        public Money Price { get; private set; }
+        public Money Money { get; private set; }
         public ICollection<ProductImage> Images { get; private set; }
 
 
-        public Product(string title, Money price)
+        public Product(string title, Money money)
         {
             Guard(title);
             Title = title;
-            Price = price;
+            Money = money;
             Id = Guid.NewGuid();
+            Images = new List<ProductImage>();
         }
         public void AddImage(string imageName)
         {
@@ -33,15 +34,15 @@ namespace CleanArch.Domain.ProductAgg
             var image = Images.FirstOrDefault(x => x.Id == id);
 
             if (image == null)
-                throw new ArgumentException();
+                throw new NullOrEmptyDomainDataException("image mot found");
 
             Images.Remove(image);
         }
-        public void Edit(string title, Money price)
+        public void Edit(string title, Money money)
         {
             Guard(title);
             Title = title;
-            Price = price;
+            Money = money;
         }
         private void Guard(string title)
         {

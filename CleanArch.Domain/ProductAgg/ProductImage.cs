@@ -1,4 +1,5 @@
 ﻿using CleanArch.Domain.Shared;
+using CleanArch.Domain.Shared.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,7 @@ namespace CleanArch.Domain.ProductAgg
     {
         public ProductImage(Guid productId, string imageName)
         {
-            if (string.IsNullOrWhiteSpace(imageName))
-                throw new ArgumentNullException(nameof(imageName));
+            NullOrEmptyDomainDataException.CheckString(imageName, "imageName");
 
             Id = Guid.NewGuid();
             ProductId = productId;

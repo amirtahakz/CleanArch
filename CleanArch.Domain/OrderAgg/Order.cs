@@ -3,6 +3,7 @@ using CleanArch.Domain.OrderAgg.Events;
 using CleanArch.Domain.OrderAgg.Services;
 using CleanArch.Domain.ProductAgg.Exceptions;
 using CleanArch.Domain.Shared;
+using CleanArch.Domain.Shared.Exceptions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ namespace CleanArch.Domain.OrderAgg
         public Order(Guid userId)
         {
             UserId = userId;
+            Items = new List<OrderItem>();
         }
         public void Finally()
         {
@@ -37,6 +39,9 @@ namespace CleanArch.Domain.OrderAgg
             if (!orderService.IsProductExist(productId))
                 throw new ProductNotFoundException();
 
+            if (Items.Any(x => x.ProductId == productId))
+                return;
+
             Items.Add(new OrderItem(Id , productId ,count , Money.FromTooman(price)));
             TotalItems += count;
         }
@@ -44,7 +49,7 @@ namespace CleanArch.Domain.OrderAgg
         {
             var item = Items.FirstOrDefault(x => x.ProductId == productId);
             if (item == null)
-                throw new Exception("Sth");
+                throw new InvalidDomainDataException();
 
             Items.Remove(item);
             TotalItems -= item.Count;
