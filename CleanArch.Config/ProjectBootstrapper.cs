@@ -10,6 +10,8 @@ using CleanArch.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using CleanArch.Domain.OrderAgg.Services;
 using CleanArch.Application.Orders.Services;
+using MediatR;
+using CleanArch.Application.Products.Create;
 
 namespace CleanArch.Config
 {
@@ -18,10 +20,11 @@ namespace CleanArch.Config
         public static void Init(IServiceCollection services)
         {
             services.AddTransient<IOrderService, OrderService>();
-            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddTransient<IOrderDomainService, OrderDomainService>();
+
+            services.AddMediatR(typeof(CreateProductCommand));
 
             services.AddScoped<ISmsService, SmsService>();
             services.AddSingleton<Context>();

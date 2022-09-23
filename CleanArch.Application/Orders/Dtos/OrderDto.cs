@@ -10,6 +10,7 @@ namespace CleanArch.Application.Orders.Dtos
     public class OrderDto
     {
         public Guid Id { get; set; }
+        public Guid UserId { get; set; }
         //public Guid ProductId { get; set; }
         public int Count { get; set; }
         public int Price { get; set; }

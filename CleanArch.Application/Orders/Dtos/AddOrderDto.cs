@@ -8,6 +8,13 @@ namespace CleanArch.Application.Orders.Dtos
 {
     public class AddOrderDto
     {
+        public AddOrderDto(Guid productId, int count, int price)
+        {
+            ProductId = productId;
+            Count = count;
+            Price = price;
+        }
+
         public Guid ProductId { get; set; }
         public int Count { get; set; }
         public int Price { get; set; }

@@ -29,7 +29,7 @@ namespace CleanArch.Domain.XUnit.Tests.ProductAgg
         public void Constructor_Should_Throw_NullOrEmptyDomainDataException_When_ImageName_Is_null()
         {
             //Arrange
-            var result =()=> new ProductImage(new Guid(), "");
+            var result = () => new ProductImage(new Guid(), "");
 
 
 

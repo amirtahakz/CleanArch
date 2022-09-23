@@ -13,6 +13,7 @@ namespace CleanArch.Domain.OrderAgg.Repository
         Order GetById(Guid id);
         void Add(Order order);
         void Update(Order order);
+        void SaveChanges();
 
     }
 }

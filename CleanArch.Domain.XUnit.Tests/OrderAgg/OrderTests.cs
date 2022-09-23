@@ -52,7 +52,7 @@ namespace CleanArch.Domain.XUnit.Tests.OrderAgg
 
 
             //Act
-            var res = ()=> order.AddItem(id , 2 , 2000 , orderDomainService);
+            var res = () => order.AddItem(id, 2, 2000, orderDomainService);
 
 
             //Assert
@@ -108,7 +108,7 @@ namespace CleanArch.Domain.XUnit.Tests.OrderAgg
 
 
             //Act
-            var action =()=> order.RemoveItem(new Guid());
+            var action = () => order.RemoveItem(new Guid());
 
 
             //Assert

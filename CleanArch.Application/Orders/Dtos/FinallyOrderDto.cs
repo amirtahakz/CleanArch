@@ -8,6 +8,11 @@ namespace CleanArch.Application.Orders.Dtos
 {
     public class FinallyOrderDto
     {
+        public FinallyOrderDto(Guid orderId)
+        {
+            OrderId = orderId;
+        }
+
         public Guid OrderId { get; set; }
     }
 }

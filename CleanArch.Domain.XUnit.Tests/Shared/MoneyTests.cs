@@ -24,7 +24,7 @@ namespace CleanArch.Domain.XUnit.Tests.Shared
         {
             //Arrange
             //Act
-            var result =()=> new Money(-1);
+            var result = () => new Money(-1);
 
 
             //Assert

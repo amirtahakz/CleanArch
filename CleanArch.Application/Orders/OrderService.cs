@@ -26,6 +26,7 @@ namespace CleanArch.Application.Orders
         {
             var order = new Order(command.ProductId);
             _repository.Add(order);
+            _repository.SaveChanges();
         }
 
         public void FinallyOrder(FinallyOrderDto command)
@@ -38,6 +39,7 @@ namespace CleanArch.Application.Orders
                 Message = "Test",
                 PhoneNumber = "0917000000"
             });
+            _repository.SaveChanges();
         }
 
         public OrderDto GetOrderById(Guid id)
@@ -46,6 +48,7 @@ namespace CleanArch.Application.Orders
             return new OrderDto()
             {
                 Id = order.Id,
+                UserId = order.UserId,
             };
         }
 
@@ -54,6 +57,7 @@ namespace CleanArch.Application.Orders
             return _repository.GetAll().Select(order => new OrderDto()
             {
                 Id = order.Id,
+                UserId = order.UserId,
                 //ProductId = order.ProductId
             }).ToList();
         }
