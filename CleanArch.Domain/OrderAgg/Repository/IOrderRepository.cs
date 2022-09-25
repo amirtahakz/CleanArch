@@ -9,11 +9,10 @@ namespace CleanArch.Domain.OrderAgg.Repository
 {
     public interface IOrderRepository
     {
-        List<Order> GetAll();
-        Order GetById(Guid id);
+        Task<Order> GetById(Guid id);
         void Add(Order order);
         void Update(Order order);
-        void SaveChanges();
+        Task SaveChanges();
 
     }
 }

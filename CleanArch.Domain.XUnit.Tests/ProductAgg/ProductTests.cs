@@ -50,7 +50,7 @@ namespace CleanArch.Domain.XUnit.Tests.ProductAgg
             var result = _productBuilder.SetTitle("test1").SetMoney(100).Build();
 
             //Act
-            result.Edit("edited", new Money(1000));
+            result.Edit("edited", new Money(1000) ,"dedd");
 
             //Assert
 
@@ -66,7 +66,7 @@ namespace CleanArch.Domain.XUnit.Tests.ProductAgg
             var result = _productBuilder.SetTitle("test1").SetMoney(100).Build();
 
             //Act
-            var action = () => result.Edit("", new Money(100));
+            var action = () => result.Edit("", new Money(100) , "");
 
 
             //Assert

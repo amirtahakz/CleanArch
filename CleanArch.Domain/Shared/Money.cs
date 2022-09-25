@@ -3,12 +3,12 @@
 
 namespace CleanArch.Domain.Shared
 {
-    public class Money
+    public class Money : BaseValueObject
     {
         /// <summary>
         /// Rial
         /// </summary>
-        public int Value { get; }
+        public int Value { get; private set; }
 
         public Money(int rialValue)
         {
@@ -16,6 +16,10 @@ namespace CleanArch.Domain.Shared
                 throw new InvalidDomainDataException();
 
             Value = rialValue;
+        }
+        public Money()
+        {
+
         }
 
         public static Money FromRial(int value)

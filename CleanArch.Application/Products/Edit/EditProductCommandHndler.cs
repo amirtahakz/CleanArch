@@ -22,7 +22,7 @@ namespace CleanArch.Application.Products.Edit
         public async Task<Unit> Handle(EditProductCommand request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetById(request.Id);
-            product.Edit(request.Title, Money.FromTooman(request.Price));
+            product.Edit(request.Title, Money.FromTooman(request.Price) , request.Description);
             _productRepository.Update(product);
             await _productRepository.SaveChanges();
 

@@ -1,6 +1,7 @@
 ﻿using CleanArch.Domain.ProductAgg;
 using CleanArch.Domain.ProductAgg.Repository;
 using CleanArch.Domain.Shared;
+using CleanArch.Domain.Shared.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,12 @@ namespace CleanArch.Application.Products.Create
 
         public async Task<Unit> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = new Product(request.Title , Money.FromTooman(request.Price));
+            var validator = new CreateProductCommandValidator();
+            var checker = validator.Validate(request);
+            if (!checker.IsValid)
+                throw new InvalidDomainDataException(checker.Errors[0].ToString());
+
+            var product = new Product(request.Title , Money.FromTooman(request.Price) , request.Description);
             _productRepository.Add(product);
             await _productRepository.SaveChanges();
 

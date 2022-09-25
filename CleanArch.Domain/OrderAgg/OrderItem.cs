@@ -9,15 +9,17 @@ namespace CleanArch.Domain.OrderAgg
 {
     public class OrderItem : BaseEntity
     {
+        private OrderItem()
+        {
+
+        }
         public OrderItem(Guid orderId , Guid productId , int count , Money price)
         {
-            Id= Guid.NewGuid();
             OrderId = orderId;
             ProductId = productId;
             Price = price;
             Count = count;
         }
-        public Guid Id { get; private set; }
         public Guid OrderId { get; protected set; }
         public Guid ProductId { get; private set; }
         public int Count { get; private set; }

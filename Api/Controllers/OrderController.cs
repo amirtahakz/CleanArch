@@ -1,5 +1,4 @@
-﻿using CleanArch.Application.Orders;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
@@ -7,17 +6,17 @@ namespace Api.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private IOrderService _orderService;
+        //private IOrderService _orderService;
 
-        public OrderController(IOrderService orderService)
-        {
-            _orderService = orderService;
-        }
+        //public OrderController(IOrderService orderService)
+        //{
+        //    _orderService = orderService;
+        //}
 
-        [HttpGet]
-        public IActionResult GetOrders()
-        {
-            return Ok(_orderService.GetOrders());
-        }
+        //[HttpGet]
+        //public IActionResult GetOrders()
+        //{
+        //    return Ok(_orderService.GetOrders());
+        //}
     }
 }

@@ -9,12 +9,11 @@ namespace CleanArch.Domain.ProductAgg.Repository
 {
     public interface IProductRepository
     {
-        List<Product> GetAll();
         Task<Product> GetById(Guid id);
-        void Add(Product order);
-        Task Update(Product order);
-        void Remove(Product order);
+        void Add(Product product);
+        void Update(Product product);
+        void Remove(Product product);
         Task SaveChanges();
-        bool IsProductService(Guid id);
+        bool IsProductExist(Guid id);
     }
 }

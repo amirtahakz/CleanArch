@@ -11,19 +11,25 @@ namespace CleanArch.Domain.ProductAgg
 {
     public class Product : AggregateRoot
     {
+        private Product()
+        {
+
+        }
         public Guid Id { get; private set; }
         public string Title { get; private set; }
         public Money Money { get; private set; }
         public ICollection<ProductImage> Images { get; private set; }
+        public string Description { get; private set; }
 
 
-        public Product(string title, Money money)
+        public Product(string title, Money money, string description)
         {
             Guard(title);
             Title = title;
             Money = money;
             Id = Guid.NewGuid();
             Images = new List<ProductImage>();
+            Description = description;
         }
         public void AddImage(string imageName)
         {
@@ -38,11 +44,12 @@ namespace CleanArch.Domain.ProductAgg
 
             Images.Remove(image);
         }
-        public void Edit(string title, Money money)
+        public void Edit(string title, Money money , string description)
         {
             Guard(title);
             Title = title;
             Money = money;
+            Description = description;
         }
         private void Guard(string title)
         {

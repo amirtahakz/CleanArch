@@ -10,6 +10,10 @@ namespace CleanArch.Domain.ProductAgg
 {
     public class ProductImage : BaseEntity
     {
+        private ProductImage()
+        {
+
+        }
         public ProductImage(Guid productId, string imageName)
         {
             NullOrEmptyDomainDataException.CheckString(imageName, "imageName");

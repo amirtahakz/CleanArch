@@ -11,16 +11,20 @@ namespace CleanArch.Domain.Users
 {
     public class User : AggregateRoot
     {
-        public User(string name, string family, PhoneBook phoneBook , string email)
+        private User()
+        {
+
+        }
+        public User(string name, string family, PhoneNumber phoneNumber, string email)
         {
             Name = name;
             Family = family;
-            PhoneBook = phoneBook;
+            PhoneNumber = phoneNumber;
         }
         public string Name { get; private set; }
         public string Family { get; private set; }
         public string Email { get; set; }
-        public PhoneBook PhoneBook { get; private set; }
+        public PhoneNumber PhoneNumber { get; private set; }
 
         public static User Register(string email)
         {

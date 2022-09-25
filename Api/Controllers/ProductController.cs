@@ -1,5 +1,7 @@
 ﻿using CleanArch.Application.Products.Create;
 using CleanArch.Application.Products.Edit;
+using CleanArch.Query.Products.DTOs;
+using CleanArch.Query.Products.GetList;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +33,12 @@ namespace Api.Controllers
         {
             await _mediator.Send(command);
             return Ok();
+        }
+
+        [HttpGet]
+        public async Task<List<ProductDto>> GetProductList()
+        {
+            return await _mediator.Send(new GetProductListQuery());
         }
     }
 }

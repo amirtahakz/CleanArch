@@ -15,11 +15,15 @@ namespace CleanArch.Domain.OrderAgg
 {
     public class Order : AggregateRoot
     {
+        private Order()
+        {
+
+        }
         public Guid UserId { get; private set; }
         public bool IsFinally { get; private set; }
         public DateTime FinallyDate { get; private set; }
 
-        public int TotalPrice;
+        public int TotalPrice => Items.Sum(r=>r.Price.Value);
         public ICollection<OrderItem> Items{ get; set; }
         public int TotalItems { get; set; }
 

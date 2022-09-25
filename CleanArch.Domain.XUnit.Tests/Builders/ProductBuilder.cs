@@ -7,6 +7,7 @@ namespace CleanArch.Domain.XUnit.Tests.Builders
     internal class ProductBuilder
     {
         private string _title = "test";
+        private string _description = "test";
         private Money _money = new Money(1000000);
         private ICollection<ProductImage> _images;
 
@@ -28,7 +29,7 @@ namespace CleanArch.Domain.XUnit.Tests.Builders
         }
         public Product Build()
         {
-            return new Product(_title, _money);
+            return new Product(_title, _money , _description);
         }
     }
 }

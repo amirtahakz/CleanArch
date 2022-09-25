@@ -1,33 +1,34 @@
-﻿using CleanArch.Infrastructure.Persistent.Memory;
-using CleanArch.Infrastructure.Persistent.Memory.Orders;
-using CleanArch.Infrastructure.Persistent.Memory.Products;
-using CleanArch.Application.Orders;
-using CleanArch.Application.Products;
-using CleanArch.Contracts;
+﻿using CleanArch.Contracts;
 using CleanArch.Domain.OrderAgg.Repository;
 using CleanArch.Domain.ProductAgg.Repository;
 using CleanArch.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
-using CleanArch.Domain.OrderAgg.Services;
-using CleanArch.Application.Orders.Services;
 using MediatR;
 using CleanArch.Application.Products.Create;
+using CleanArch.Infrastructure.Persistent.Ef;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using CleanArch.Infrastructure.Persistent.Ef.Orders;
+using CleanArch.Infrastructure.Persistent.Ef.Products;
+using CleanArch.Query.Products.GetById;
 
 namespace CleanArch.Config
 {
     public class ProjectBootstrapper
     {
-        public static void Init(IServiceCollection services)
+        public static void Init(IServiceCollection services , string connectionString)
         {
-            services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<IOrderDomainService, OrderDomainService>();
+            services.AddMediatR(typeof(CreateProductCommand).Assembly);
+            services.AddMediatR(typeof(GetProductByIdQuery).Assembly);
 
-            services.AddMediatR(typeof(CreateProductCommand));
+            services.AddDbContext<ApplicationDbContext>(option => { 
+                option.UseSqlServer(connectionString); 
+            });
 
             services.AddScoped<ISmsService, SmsService>();
-            services.AddSingleton<Context>();
+
         }
     }
 }
