@@ -1,4 +1,5 @@
 ﻿using CleanArch.Domain.ProductAgg;
+using CleanArch.Domain.ProductAgg.Events;
 using CleanArch.Domain.Shared;
 using CleanArch.Domain.Shared.Exceptions;
 using System;
@@ -30,6 +31,7 @@ namespace CleanArch.Domain.ProductAgg
             Id = Guid.NewGuid();
             Images = new List<ProductImage>();
             Description = description;
+            AddDomainEvent(new ProductCreated(Id , title));
         }
         public void AddImage(string imageName)
         {

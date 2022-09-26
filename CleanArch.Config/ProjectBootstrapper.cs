@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using CleanArch.Infrastructure.Persistent.Ef.Orders;
 using CleanArch.Infrastructure.Persistent.Ef.Products;
 using CleanArch.Query.Products.GetById;
+using CleanArch.Application.Shared;
+using FluentValidation;
 
 namespace CleanArch.Config
 {
@@ -20,9 +22,13 @@ namespace CleanArch.Config
         {
             services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommandValidationBehavior<,>));
             services.AddMediatR(typeof(CreateProductCommand).Assembly);
             services.AddMediatR(typeof(GetProductByIdQuery).Assembly);
 
+            services.AddValidatorsFromAssembly(typeof(CreateProductCommandValidator).Assembly);
             services.AddDbContext<ApplicationDbContext>(option => { 
                 option.UseSqlServer(connectionString); 
             });
