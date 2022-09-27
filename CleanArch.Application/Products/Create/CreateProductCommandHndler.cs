@@ -1,4 +1,5 @@
 ﻿using CleanArch.Domain.ProductAgg;
+using CleanArch.Domain.ProductAgg.Events;
 using CleanArch.Domain.ProductAgg.Repository;
 using CleanArch.Domain.Shared;
 using CleanArch.Domain.Shared.Exceptions;
@@ -33,10 +34,7 @@ namespace CleanArch.Application.Products.Create
             _productRepository.Add(product);
             await _productRepository.SaveChanges();
 
-            foreach (var @event in product.DomainEvents)
-            {
-                await _mediator.Publish(@event);
-            }
+            await _mediator.Publish(new ProductCreated(product.Id , product.Title));
 
             return await Unit.Task;
         }

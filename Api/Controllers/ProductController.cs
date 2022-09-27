@@ -1,5 +1,6 @@
 ﻿using CleanArch.Application.Products.Create;
 using CleanArch.Application.Products.Edit;
+using CleanArch.Query.Models.Products;
 using CleanArch.Query.Products.DTOs;
 using CleanArch.Query.Products.GetList;
 using MediatR;
@@ -36,7 +37,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<List<ProductDto>> GetProductList()
+        public async Task<List<ProductReadModel>> GetProductList()
         {
             return await _mediator.Send(new GetProductListQuery());
         }

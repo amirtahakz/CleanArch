@@ -1,5 +1,7 @@
 ﻿using CleanArch.Domain.ProductAgg;
 using CleanArch.Infrastructure.Persistent.Ef;
+using CleanArch.Query.Models.Products.Repository;
+using CleanArch.Query.Models.Products;
 using CleanArch.Query.Products.DTOs;
 using CleanArch.Query.Products.GetById;
 using MediatR;
@@ -12,18 +14,18 @@ using System.Threading.Tasks;
 
 namespace CleanArch.Query.Products.GetList
 {
-    public class GetProductListQueryHandler : IRequestHandler<GetProductListQuery, List<ProductDto>>
+    public class GetProductListQueryHandler : IRequestHandler<GetProductListQuery, List<ProductReadModel>>
     {
-        private readonly ApplicationDbContext _context;
+        private IProductReadRepository _readRepository;
 
-        public GetProductListQueryHandler(ApplicationDbContext context)
+        public GetProductListQueryHandler(IProductReadRepository readRepository)
         {
-            _context = context;
+            _readRepository = readRepository;
         }
 
-        public async Task<List<ProductDto>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
+        public async Task<List<ProductReadModel>> Handle(GetProductListQuery request, CancellationToken cancellationToken)
         {
-            return await _context.Products.Include(c => c.Images).Select(product => ProductMapper.MapProductToDto(product)).ToListAsync();
+            return await _readRepository.GetAll();
         }
     }
 

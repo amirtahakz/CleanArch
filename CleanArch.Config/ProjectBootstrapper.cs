@@ -13,6 +13,9 @@ using CleanArch.Infrastructure.Persistent.Ef.Products;
 using CleanArch.Query.Products.GetById;
 using CleanArch.Application.Shared;
 using FluentValidation;
+using CleanArch.Query.Models;
+using MongoDB.Driver;
+using CleanArch.Query.Models.Products.Repository;
 
 namespace CleanArch.Config
 {
@@ -29,8 +32,17 @@ namespace CleanArch.Config
             services.AddMediatR(typeof(GetProductByIdQuery).Assembly);
 
             services.AddValidatorsFromAssembly(typeof(CreateProductCommandValidator).Assembly);
+
+            services.AddTransient<IProductReadRepository, ProductReadRepository>();
+
             services.AddDbContext<ApplicationDbContext>(option => { 
                 option.UseSqlServer(connectionString); 
+            });
+ 
+
+            services.AddSingleton<IMongoClient, MongoClient>(services =>
+            {
+                return new MongoClient("mongodb://localhost:27017");
             });
 
             services.AddScoped<ISmsService, SmsService>();

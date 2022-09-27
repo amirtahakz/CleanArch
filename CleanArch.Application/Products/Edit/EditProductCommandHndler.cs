@@ -13,10 +13,12 @@ namespace CleanArch.Application.Products.Edit
     public class EditProductCommandHndler : IRequestHandler<EditProductCommand>
     {
         private readonly IProductRepository _productRepository;
+        private readonly IMediator _mediator;
 
-        public EditProductCommandHndler(IProductRepository productRepository)
+        public EditProductCommandHndler(IProductRepository productRepository, IMediator mediator)
         {
             _productRepository = productRepository;
+            _mediator = mediator;
         }
 
         public async Task<Unit> Handle(EditProductCommand request, CancellationToken cancellationToken)
@@ -26,6 +28,11 @@ namespace CleanArch.Application.Products.Edit
             _productRepository.Update(product);
             await _productRepository.SaveChanges();
 
+
+            foreach (var @event in product.DomainEvents)
+            {
+                await _mediator.Publish(@event);
+            }
             return Unit.Value;
         }
     }

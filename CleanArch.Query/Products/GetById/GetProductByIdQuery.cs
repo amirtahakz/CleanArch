@@ -1,4 +1,5 @@
-﻿using CleanArch.Query.Products.DTOs;
+﻿using CleanArch.Query.Models.Products;
+using CleanArch.Query.Products.DTOs;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace CleanArch.Query.Products.GetById
 {
-    public record GetProductByIdQuery(Guid ProductId): IRequest<ProductDto>;
+    public record GetProductByIdQuery(Guid ProductId): IRequest<ProductReadModel>;
 }

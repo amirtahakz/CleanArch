@@ -52,6 +52,11 @@ namespace CleanArch.Domain.ProductAgg
             Title = title;
             Money = money;
             Description = description;
+            AddDomainEvent(new ProductEdited()
+            {
+                Title = title,
+                ProductId = Id
+            });
         }
         private void Guard(string title)
         {

@@ -1,4 +1,5 @@
-﻿using CleanArch.Query.Products.DTOs;
+﻿using CleanArch.Query.Models.Products;
+using CleanArch.Query.Products.DTOs;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 
 namespace CleanArch.Query.Products.GetList
 {
-    public record GetProductListQuery : IRequest<List<ProductDto>>;
+    public record GetProductListQuery : IRequest<List<ProductReadModel>>;
 }
