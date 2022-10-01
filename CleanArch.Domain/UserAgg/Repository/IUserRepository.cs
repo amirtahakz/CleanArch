@@ -17,7 +17,7 @@ namespace CleanArch.Domain.UserAgg.Repository
 
         bool UserIsExist(string email);
 
-        Task SaveChange();
+        Task SaveChanges();
 
         void Update(User user);
     }

@@ -1,4 +1,5 @@
 ﻿using CleanArch.Domain.Shared;
+using CleanArch.Domain.Users.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -12,6 +12,10 @@ namespace CleanArch.Domain.Users.ValueObjects
 
         public string Phone { get; private set; }
 
+        public PhoneNumber()
+        {
+
+        }
         public PhoneNumber(string phone)
         {
             if (phone.Length < 11 || phone.Length > 11)

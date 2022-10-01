@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CleanArch.Application.Products.Create
 {
-    public class CreateProductCommandHndler : IRequestHandler<CreateProductCommand>
+    public class CreateProductCommandHndler : IRequestHandler<CreateProductCommand , Guid>
     {
         private readonly IProductRepository _productRepository;
         private readonly IMediator _mediator;
@@ -23,7 +23,7 @@ namespace CleanArch.Application.Products.Create
             _mediator = mediator;
         }
 
-        public async Task<Unit> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
             //var validator = new CreateProductCommandValidator();
             //var checker = validator.Validate(request);
@@ -36,7 +36,7 @@ namespace CleanArch.Application.Products.Create
 
             await _mediator.Publish(new ProductCreated(product.Id , product.Title));
 
-            return await Unit.Task;
+            return product.Id;
         }
     }
 }

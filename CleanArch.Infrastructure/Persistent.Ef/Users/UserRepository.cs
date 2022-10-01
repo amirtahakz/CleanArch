@@ -33,7 +33,7 @@ namespace CleanArch.Infrastructure.Persistent.Ef.Users
             return await _context.Users.FirstOrDefaultAsync(f => f.Id == id);
         }
 
-        public async Task SaveChange()
+        public async Task SaveChanges()
         {
             await _context.SaveChangesAsync();
         }

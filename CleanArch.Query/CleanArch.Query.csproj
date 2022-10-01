@@ -12,9 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Users\DTOs\" />
     <Folder Include="Users\GetById\" />
-    <Folder Include="Users\GetList\" />
   </ItemGroup>
 
   <ItemGroup>

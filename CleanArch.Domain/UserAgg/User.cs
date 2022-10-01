@@ -1,5 +1,7 @@
 ﻿using CleanArch.Domain.Shared;
+using CleanArch.Domain.Shared.Exceptions;
 using CleanArch.Domain.UserAgg.Events;
+using CleanArch.Domain.UserAgg.Services;
 using CleanArch.Domain.Users.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -15,9 +17,13 @@ namespace CleanArch.Domain.Users
         {
 
         }
-        public User(string name, string family, PhoneNumber phoneNumber, string email)
+        public User(string name, string family, PhoneNumber phoneNumber, string email, IUserDomainService domainService)
         {
+            if (domainService.IsEmailExist(email))
+                throw new InvalidDomainDataException("ایمیل وارد شده قبلا استفاده شده است");
+
             Name = name;
+            Email = email;
             Family = family;
             PhoneNumber = phoneNumber;
         }
@@ -26,9 +32,9 @@ namespace CleanArch.Domain.Users
         public string Email { get; set; }
         public PhoneNumber PhoneNumber { get; private set; }
 
-        public static User Register(string email)
+        public static User Register(string email , string phoneNumber , IUserDomainService domainService)
         {
-            var user = new User("", "", null, email);
+            var user = new User("", "", new PhoneNumber(phoneNumber), email , domainService);
             user.AddDomainEvent(new UserRegistered(user.Id , email));
             return user;
         }

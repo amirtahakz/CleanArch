@@ -13,6 +13,7 @@ namespace CleanArch.Domain.Shared
         public BaseEntity()
         {
             CreationDate = new DateTime();
+            Id = Guid.NewGuid();
         }
     }
 }

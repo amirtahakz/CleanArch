@@ -16,7 +16,6 @@ namespace CleanArch.Domain.ProductAgg
         {
 
         }
-        public Guid Id { get; private set; }
         public string Title { get; private set; }
         public Money Money { get; private set; }
         public ICollection<ProductImage> Images { get; private set; }
@@ -28,7 +27,6 @@ namespace CleanArch.Domain.ProductAgg
             Guard(title);
             Title = title;
             Money = money;
-            Id = Guid.NewGuid();
             Images = new List<ProductImage>();
             Description = description;
             AddDomainEvent(new ProductCreated(Id , title));
